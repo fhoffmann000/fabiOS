@@ -4,4 +4,4 @@ fabiOS.iso
 kernel.elf
 link_verbose_comments.ld
 loader_verbose_comments.s
-loader.o
+*.o
