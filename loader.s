@@ -2,7 +2,7 @@
 BITS 32
 
 global loader
-extern testfunc_sum
+extern kernel_main
 
 MAGIC_NUMBER equ 0x1BADB002
 FLAGS        equ 0x0
@@ -18,12 +18,8 @@ align 4
 section .text
 align 4
 loader:
-    mov esp, kernel_stack + KERNEL_STACK_SIZE ; Setup stack pointer
-    push dword 3
-    push dword 2
-    push dword 1
-    call testfunc_sum
-    add esp, 12
+    mov esp, kernel_stack + KERNEL_STACK_SIZE ;Setup stack pointer
+    call kernel_main
 .hang:
     jmp .hang
 
