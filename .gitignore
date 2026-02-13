@@ -6,3 +6,4 @@ kernel.elf
 link_verbose_comments.ld
 loader_verbose_comments.s
 *.o
+*.d

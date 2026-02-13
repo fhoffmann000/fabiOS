@@ -1,10 +1,23 @@
-OBJECTS = loader.o kernelmain.o
+INCDIRS=. ./include/
+CODEDIRS=. lib
+
 CC = gcc
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -ffreestanding -Wall -Wextra -Werror -c -Iinclude
+DEPFLAGS=-MP -MD
+NOFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -ffreestanding 
+CFLAGS = -m32 -Wall -Wextra -Werror -g $(foreach D, $(INCDIRS), -I$(D)) $(DEPFLAGS) $(NOFLAGS)
+
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf32
 
+CFILES=$(foreach D, $(CODEDIRS), $(wildcard $(D)/*.c))
+
+OBJECTS=$(patsubst %.c,%.o,$(CFILES)) loader.o
+DEPFILES=$(patsubst %.c,%.d,$(CFILES)) 
+
+-include $(DEPFILES)
+
+.PHONY: all clean runqemu
 
 all: kernel.elf
 	mkdir -p iso/boot/grub
@@ -16,10 +29,13 @@ kernel.elf: $(OBJECTS)
 	ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
 
+runqemu: all
+	qemu-system-i386 -cdrom fabiOS.iso
+
 clean:
-	rm -rf *.o kernel.elf fabiOS.iso iso/
+	rm -rf *.o *.d lib/*.d lib/*.o kernel.elf fabiOS.iso iso/
