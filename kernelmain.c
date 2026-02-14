@@ -4,10 +4,8 @@
 #include "util_lib.h"
 
 int kernel_main() {
-
-    const char *text = "balaslkdjhaslkdfhaslkfd";
-    
-    writeToScreen(text, strlen(text));
+  
+    styleCursor(BIG);
 
     return 0;
 }
