@@ -32,3 +32,10 @@ void scroll(uint16_t row) {
     outb(CRTC_CMD_PORT, SCREEN_START_POS_LOW_BYTE_CMD);
     outb(CRTC_DATA_PORT, posLowByte);
 }
+
+void writeToScreen(const char *buf, uint32_t len) {
+    for (uint32_t i=0; i<len; i++) {
+        writeLetterToFramebuffer(buf[i], 0, i, WHITE, BLACK);
+    }
+    moveCursor(len);
+}

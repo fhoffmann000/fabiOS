@@ -30,3 +30,4 @@
 void writeLetterToFramebuffer(uint8_t letter, uint16_t row, uint16_t col, uint8_t textColor, uint8_t bgColor);
 void moveCursor(uint16_t pos);
 void scroll(uint16_t row);
+void writeToScreen(const char *buf, uint32_t len);

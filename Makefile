@@ -37,5 +37,8 @@ kernel.elf: $(OBJECTS)
 runqemu: all
 	qemu-system-i386 -cdrom fabiOS.iso
 
+cleanrunqemu: clean all
+	qemu-system-i386 -cdrom fabiOS.iso
+
 clean:
 	rm -rf *.o *.d lib/*.d lib/*.o kernel.elf fabiOS.iso iso/
