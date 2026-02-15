@@ -35,6 +35,6 @@ void writeLetterToFramebuffer(uint8_t letter, uint16_t row, uint16_t col, uint8_
 void moveCursor(uint16_t pos);
 void scroll(uint16_t row);
 void writeToScreen(const char *buf, uint32_t len);
-void writeLetterToScreen(const char c, uint16_t pos);
-void printByte(uint8_t *pbyte, uint32_t pos);
+void writeLetterToScreen(const uint8_t c, uint16_t pos);
+void writeByteToScreen(uint8_t *pbyte, uint32_t pos);
 void styleCursor(CursorStyle cstyle);

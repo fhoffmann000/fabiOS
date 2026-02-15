@@ -58,7 +58,7 @@ void scroll(uint16_t row) {
     outb(CRTC_DATA_PORT, posLowByte);
 }
 
-void writeLetterToScreen(const char c, uint16_t pos) {
+void writeLetterToScreen(const uint8_t c, uint16_t pos) {
     writeLetterToFramebuffer(c, 0, pos, WHITE, BLACK);
 }
 
@@ -68,7 +68,7 @@ void writeToScreen(const char *buf, uint32_t len) {
     }
 }
 
-void printByte(uint8_t *pbyte, uint32_t pos) {
+void writeByteToScreen(uint8_t *pbyte, uint32_t pos) {
     for (int16_t bit=0; bit<8; bit++) {
         uint8_t mask = (uint8_t) 0x1 << (7-bit);
         if (*pbyte & mask) {

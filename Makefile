@@ -37,6 +37,9 @@ kernel.elf: $(OBJECTS)
 runqemu: all
 	qemu-system-i386 -cdrom fabiOS.iso
 
+runbochs: all
+	bochs -f bochsrc.txt
+
 cleanrunqemu: clean all
 	qemu-system-i386 -cdrom fabiOS.iso
 
