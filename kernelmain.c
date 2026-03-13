@@ -3,10 +3,13 @@
 #include "asm.h"
 #include "util.h"
 #include "serial.h"
+#include "gdt.h"
 
 int kernel_main() {
   
-    char *str = "balsdj3425alsdjghaslkkdjgflaöäösdjfoaisjfokasjdflaksjdgfoiasjhigujhaeoghnfasoiefdsa2345hfaosdjfhasldjgh";
+    gdt_init();
+
+    char *str = "balsdj3425alsdjghaslkkdjgflaöäösdjfoaisjfokasjd";
 
     printLine(str, strlen(str), 0);
     logLine(str, strlen(str));
